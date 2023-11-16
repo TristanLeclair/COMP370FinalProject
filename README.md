@@ -21,6 +21,6 @@
 # Contributors
 
 - [Tristan Leclair-Vani](https://github.com/TristanLeclair)
-- [Jean-Alexandre Nolin]()
+- [Jean-Alexandre Nolin](https://github.com/JANolin)
 - [Juan Rodriguez]()
 - [Michael Almanza]()
