@@ -20,7 +20,7 @@
 
 # Contributors
 
-[Tristan Leclair-Vani](https://github.com/TristanLeclair)
-[Jean-Alexandre Nolin]()
-[Juan Rodriguez]()
-[Michael Almanza]()
+- [Tristan Leclair-Vani](https://github.com/TristanLeclair)
+- [Jean-Alexandre Nolin]()
+- [Juan Rodriguez]()
+- [Michael Almanza]()
