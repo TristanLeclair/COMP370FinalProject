@@ -22,5 +22,5 @@
 
 - [Tristan Leclair-Vani](https://github.com/TristanLeclair)
 - [Jean-Alexandre Nolin](https://github.com/JANolin)
-- [Juan Rodriguez]()
-- [Michael Almanza]()
+- [Juan Rodriguez](https://github.com/JiRodriguez2411)
+- [Michael Almanza](https://github.com/MichaelAlmanza)
