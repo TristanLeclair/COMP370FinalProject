@@ -1,8 +1,8 @@
 import json
-import creds
 import argparse
 
-from src.common.requestutils import make_query_or, make_query_and, send_resquest
+from src.common.requestutils import make_query_or, make_query_and
+from src.common.collect import get_from_newsapi
 
 KEYWORDS = [
     "Taylor Swift | The Eras Tour",
@@ -81,13 +81,9 @@ def main():
     else:
         query = make_query_or(KEYWORDS)
 
-    url = f"https://newsapi.org/v2/everything?q={query}&apiKey={creds.API_KEY}"
+    data = get_from_newsapi(query)
 
-    data = send_resquest(url)
-    if data:
-        json.dump(data.json(), output_file, indent=2)
-    else:
-        raise ValueError("Request failed")
+    json.dump(data.json(), output_file, indent=2)
 
 
 if __name__ == "__main__":
