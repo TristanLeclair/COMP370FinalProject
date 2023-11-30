@@ -85,6 +85,21 @@ We've taken our data from [newsapi](https://newsapi.org/)
 
 # Code structure
 
+.
+├── assignment_description
+├── data
+│   ├── articles
+│   └── interim
+│       └── keywords
+├── notebooks
+├── scripts
+│   └── python
+├── src
+│   └── common
+└── tests
+    └── src
+        └── common
+
 # Results
 
 # Future work
