@@ -4,7 +4,11 @@ from src.common.requestutils import send_resquest
 
 
 def get_from_newsapi(query):
-    url = f"https://newsapi.org/v2/everything?q={query}&apiKey={creds.API_KEY}"
+    language = "en"
+
+    print(query)
+
+    url = f"https://newsapi.org/v2/everything?q={query}&apiKey={creds.API_KEY}&language={language}"
 
     data = send_resquest(url)
 
