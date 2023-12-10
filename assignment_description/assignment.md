@@ -104,7 +104,7 @@ Final Report Details
 
 Your report should be written using the Camera Ready AAAI format (you
 may use either Word or Latex):
-[https://aaai.org/authorkit24-2/]{.underline}.
+[https://aaai.org/authorkit24-2/].
 
 The template formatting (e.g., font, font size, spacing, citation style)
 should be followed strictly. The report structure should consist of the
@@ -158,7 +158,6 @@ Fine Print
 Evaluation Rubric 
 =================
 
-|--- | --- | --- |
 | **Criteria** | **Points (100 in total)** | **Details** |
 | --- | --- | --- |
 | Style | 10 | Is the text written in a clear, concise way? Is good grammar and spelling employed throughout? |
