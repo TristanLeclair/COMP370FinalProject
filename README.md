@@ -63,16 +63,18 @@ TODO: select movie
 ...
 
 The other movies to compare it to are:
-- Taylor Swift | The Eras Tour
-- The Exorcist: Believer
-- PAW Patrol: The Mighty Movie
-- Killers of the Flower Moon
-- Five Nights at Freddy’s
-- Priscilla
-- Saw X
-- The Creator
-- After Death
+
+- Renaissance: a film by beyonce
+- Godzilla Minus One
+- Napoleon
+- Wish
+- The Hunger Games: The Ballad of Songbirds & Snakes
+- Trolls Band Together
+- Thanksgiving
 - The Marvels
+- Five Nights at Freddy's
+- After Death
+- Killers of the Flower Moon
 
 
 ## Source Data
