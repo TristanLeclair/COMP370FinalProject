@@ -1,3 +1,7 @@
+raw_articles_path = ./data/raw/articles.json
+processed_articles_path = ./data/processed/movies.json
+
+
 run-tests:
 	@echo "Running tests..."
 	@echo
@@ -23,7 +27,7 @@ run-collect-help: ./scripts/python/collect_articles.py
 run-extract: ./scripts/python/extract_movies.py
 	@echo "Extracting movies..."
 	@echo
-	@python -m scripts.python.extract_movies -i $(articles_path)
+	@python -m scripts.python.extract_movies -i $(raw_articles_path)
 
 run-extract-help: ./scripts/python/extract_movies.py
 	@python -m scripts.python.extract_movies -h
@@ -31,20 +35,12 @@ run-extract-help: ./scripts/python/extract_movies.py
 run-extract_deep: ./scripts/python/prepare_data.py
 	@echo "Extracting movies..."
 	@echo
-	@python -m scripts.python.extract_movies -i $(articles_path) --deep
+	@python -m scripts.python.extract_movies -i $(raw_articles_path) --deep
 
-run-collect-bulk: ./scripts/python/collect_bulk.py
-	@echo "Collecting bulk..."
+run-split: ./scripts/python/split_for_coding.py
+	@echo "Splitting data..."
 	@echo
-	@python -m scripts.python.collect_bulk -i $(keywords_path)
-
-run-collect-bulk_deep: ./scripts/python/collect_bulk.py
-	@echo "Collecting bulk..."
-	@echo
-	@python -m scripts.python.collect_bulk -i $(keywords_path) --deep
-
-run-collect-bulk-help: ./scripts/python/collect_bulk.py
-	@python -m scripts.python.collect_bulk -h
+	@python -m scripts.python.split_for_coding -i $(processed_articles_path)
 
 venv/bin/activate: requirements.txt
 	@echo "Creating virtual environment..."
