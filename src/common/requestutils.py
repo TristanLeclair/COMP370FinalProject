@@ -13,7 +13,7 @@ def send_resquest(url, params=None, cache: Optional[CachedSession] = None):
         data = cache.get(
             url,
             params=params,
-            headers={"User-Agent": "Mozilla/5.0"},
+            # headers={"User-Agent": "Mozilla/5.0"},
         )
         if data.from_cache:
             logger.info(f"Using cached data for {url}")
@@ -23,13 +23,16 @@ def send_resquest(url, params=None, cache: Optional[CachedSession] = None):
             expires_seconds = expires_seconds - datetime.datetime.now()
             logger.info(f"Data expires in {expires_seconds} at {data.expires}")
         else:
-            logger.info(f"Got status code {data.status_code} for {url}")
+            if data.status_code != 200:
+                logger.warning(f"Status code {data.status_code} for {url}")
+            else:
+                logger.info(f"Got status code {data.status_code} for {url}")
 
     else:
         data = requests.get(
             url,
             params=params,
-            headers={"User-Agent": "Mozilla/5.0"},
+            # headers={"User-Agent": "Mozilla/5.0"},
         )
         logger.info(f"Got status code {data.status_code} for {url}")
 

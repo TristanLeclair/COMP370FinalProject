@@ -2,7 +2,7 @@ import argparse
 import logging
 from typing import List, Tuple
 
-from src.common.collect import get_from_newsapi
+from src.common.collect import get_from_api
 from src.common.json_utils import load_json, output_to_path
 from src.common.logging_utils import add_logging_args, setup_root_logger
 
@@ -124,7 +124,7 @@ def main():
     else:
         raise ValueError("Need to either provide a file or a list of keywords")
 
-    data = get_from_newsapi(
+    data = get_from_api(
         KEYWORDS, is_or_query=not use_and, use_cache=not ignore_cache, pages=pages
     )
 
