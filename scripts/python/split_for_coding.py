@@ -1,10 +1,8 @@
 import argparse
 import logging
-import random
-import pandas as pd
-import numpy as np
 
-from src.common.json_utils import load_json
+import numpy as np
+import pandas as pd
 from src.common.logging_utils import add_logging_args, setup_root_logger
 
 global logger
