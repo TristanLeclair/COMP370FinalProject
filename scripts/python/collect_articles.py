@@ -135,8 +135,6 @@ def main():
 
     output_to_path(output_file, data)
 
-    # logger.info(f'Collected {data.json()["totalResults"]} articles')
-
 
 if __name__ == "__main__":
     main()
