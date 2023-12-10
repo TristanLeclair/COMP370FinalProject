@@ -47,11 +47,17 @@ def main():
 
     logger.info("Loading data...")
     df = pd.read_json(input_file)
-    df.dropna(inplace=True)
+    df_clean = df.copy()
+    df_clean.dropna(inplace=True)
+
+    # remove removed articles
+    df_clean = df_clean[df_clean["source"] != "[Removed]"]
     # randomly sample 200 articles
-    df_sampled = df.sample(n=200)
+    df_sampled = df_clean.sample(n=200)
 
     logger.info("Writing data...")
+
+    logger.info(df_sampled.head())
 
     df_sampled.to_csv(output_file, sep="\t", index=False)
 
