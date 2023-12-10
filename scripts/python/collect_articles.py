@@ -1,10 +1,12 @@
 import argparse
+import logging
+from typing import List, Tuple
 
-from typing import Tuple, List
-
-from src.common.requestutils import make_query_or, make_query_and
+from requests_cache import CachedSession
 from src.common.collect import get_from_newsapi
-from src.common.json_utils import output_to_path, load_json
+from src.common.json_utils import load_json, output_to_path
+from src.common.logging_utils import add_logging_args, setup_root_logger
+from src.common.requestutils import make_query_and, make_query_or
 
 KEYWORDS = [
     "Taylor Swift | The Eras Tour",
@@ -19,8 +21,10 @@ KEYWORDS = [
     "The Marvels",
 ]
 
+global logger
 
-def parse_args() -> Tuple[argparse.FileType, List[str], str, bool]:
+
+def parse_args() -> Tuple[argparse.FileType, List[str], str, bool, bool, str, bool]:
     """Parse command line arguments.
     Parse command line arguments and return them.
     i and k are mutually exclusive.
@@ -64,13 +68,60 @@ def parse_args() -> Tuple[argparse.FileType, List[str], str, bool]:
         default=False,
     )
 
+    add_logging_args(parser)
+
+    # add ignore cache argument
+    parser.add_argument(
+        "-c",
+        "--ignore-cache",
+        dest="ignore_cache",
+        action="store_true",
+        help="Ignore the cache",
+        default=True,
+    )
+
     args = parser.parse_args()
 
-    return (args.i, args.k, args.o, args.a)
+    return (
+        args.i,
+        args.k,
+        args.o,
+        args.a,
+        args.ignore_cache,
+        args.log_level,
+        args.deep_logging,
+    )
+
+
+def use_cache(name: str) -> CachedSession:
+    """Use a cached session.
+    Returns:
+        CachedSession: A cached session.
+    """
+
+    return CachedSession(
+        name + "_cache",
+        ignored_parameters=["apiKey"],
+        expire_after=3600,
+        backend="filesystem",
+    )
 
 
 def main():
-    (input_file, keywords, output_file, use_and) = parse_args()
+    global logger
+    (
+        input_file,
+        keywords,
+        output_file,
+        use_and,
+        use_caching,
+        log_level,
+        deep_logging,
+    ) = parse_args()
+
+    setup_root_logger(logging, log_level, deep_logging)
+    logger = logging.getLogger(__name__)
+
     if input_file:
         KEYWORDS = load_json(input_file)
     elif keywords:
@@ -83,9 +134,13 @@ def main():
     else:
         query = make_query_or(KEYWORDS)
 
-    data = get_from_newsapi(query)
+    session = use_cache("newsapi") if use_caching else None
+
+    data = get_from_newsapi(query, session=session)
 
     output_to_path(output_file, data.json())
+
+    logger.info(f'Collected {data.json()["totalResults"]} articles')
 
 
 if __name__ == "__main__":

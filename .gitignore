@@ -1,6 +1,7 @@
 # Project specfic things here
 
 data/*
+newsapi_cache/
 
 !data/interim/
 

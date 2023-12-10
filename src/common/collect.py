@@ -1,16 +1,20 @@
-import creds
+import logging
 
+import creds
 from src.common.requestutils import send_resquest
 
+logger = logging.getLogger(__name__)
 
-def get_from_newsapi(query):
+
+def get_from_newsapi(query: str, session=None):
+    """Get data from newsapi.org in english."""
     language = "en"
 
-    print(query)
+    url = "https://newsapi.org/v2/everything"
 
-    url = f"https://newsapi.org/v2/everything?q={query}&apiKey={creds.API_KEY}&language={language}"
+    params = {"q": query, "language": language, "apiKey": creds.API_KEY}
 
-    data = send_resquest(url)
+    data = send_resquest(url, params=params, session=session)
 
     if not data:
         raise ValueError("Request failed")
