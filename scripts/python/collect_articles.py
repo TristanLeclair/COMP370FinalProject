@@ -1,5 +1,7 @@
 import argparse
 
+from typing import Tuple, List
+
 from src.common.requestutils import make_query_or, make_query_and
 from src.common.collect import get_from_newsapi
 from src.common.json_utils import output_to_path, load_json
@@ -18,7 +20,7 @@ KEYWORDS = [
 ]
 
 
-def parse_args():
+def parse_args() -> Tuple[argparse.FileType, List[str], str, bool]:
     """Parse command line arguments.
     Parse command line arguments and return them.
     i and k are mutually exclusive.
@@ -50,7 +52,7 @@ def parse_args():
 
     parser.add_argument(
         "-o",
-        type=argparse.FileType("w"),
+        type=str,
         help="Output file",
         default="data/raw/articles.json",
     )
