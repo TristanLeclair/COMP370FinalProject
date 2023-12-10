@@ -7,7 +7,7 @@ def load_json(input_file):
     return json.load(input_file)
 
 
-def output_to_path(path: str, data: dict):
+def output_to_path(path: str, data: dict | list):
     """Output data to path.
     Will verify that the path exists and then output the data to it.
     If the path does not exist, it will create the folder structure."""

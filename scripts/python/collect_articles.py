@@ -2,11 +2,9 @@ import argparse
 import logging
 from typing import List, Tuple
 
-from requests_cache import CachedSession
 from src.common.collect import get_from_newsapi
 from src.common.json_utils import load_json, output_to_path
 from src.common.logging_utils import add_logging_args, setup_root_logger
-from src.common.requestutils import make_query_and, make_query_or
 
 KEYWORDS = [
     "Taylor Swift | The Eras Tour",
@@ -24,7 +22,9 @@ KEYWORDS = [
 global logger
 
 
-def parse_args() -> Tuple[argparse.FileType, List[str], str, bool, bool, str, bool]:
+def parse_args() -> (
+    Tuple[argparse.FileType, List[str], str, bool, int, bool, str, bool]
+):
     """Parse command line arguments.
     Parse command line arguments and return them.
     i and k are mutually exclusive.
@@ -68,6 +68,13 @@ def parse_args() -> Tuple[argparse.FileType, List[str], str, bool, bool, str, bo
         default=False,
     )
 
+    parser.add_argument(
+        "-p",
+        type=int,
+        help="Number of pages to retreive",
+        default=50,
+    )
+
     add_logging_args(parser)
 
     # add ignore cache argument
@@ -77,7 +84,7 @@ def parse_args() -> Tuple[argparse.FileType, List[str], str, bool, bool, str, bo
         dest="ignore_cache",
         action="store_true",
         help="Ignore the cache",
-        default=True,
+        default=False,
     )
 
     args = parser.parse_args()
@@ -87,23 +94,10 @@ def parse_args() -> Tuple[argparse.FileType, List[str], str, bool, bool, str, bo
         args.k,
         args.o,
         args.a,
+        args.p,
         args.ignore_cache,
         args.log_level,
         args.deep_logging,
-    )
-
-
-def use_cache(name: str) -> CachedSession:
-    """Use a cached session.
-    Returns:
-        CachedSession: A cached session.
-    """
-
-    return CachedSession(
-        name + "_cache",
-        ignored_parameters=["apiKey"],
-        expire_after=3600,
-        backend="filesystem",
     )
 
 
@@ -114,7 +108,8 @@ def main():
         keywords,
         output_file,
         use_and,
-        use_caching,
+        pages,
+        ignore_cache,
         log_level,
         deep_logging,
     ) = parse_args()
@@ -129,14 +124,9 @@ def main():
     else:
         raise ValueError("Need to either provide a file or a list of keywords")
 
-    if use_and:
-        query = make_query_and(KEYWORDS)
-    else:
-        query = make_query_or(KEYWORDS)
-
-    session = use_cache("newsapi") if use_caching else None
-
-    data = get_from_newsapi(query, session=session)
+    data = get_from_newsapi(
+        KEYWORDS, is_or_query=not use_and, use_cache=not ignore_cache, pages=pages
+    )
 
     output_to_path(output_file, data.json())
 

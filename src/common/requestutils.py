@@ -8,9 +8,9 @@ from requests_cache import CachedSession
 logger = logging.getLogger(__name__)
 
 
-def send_resquest(url, params=None, session: Optional[CachedSession] = None):
-    if session:
-        data = session.get(
+def send_resquest(url, params=None, cache: Optional[CachedSession] = None):
+    if cache:
+        data = cache.get(
             url,
             params=params,
             headers={"User-Agent": "Mozilla/5.0"},
@@ -18,7 +18,7 @@ def send_resquest(url, params=None, session: Optional[CachedSession] = None):
         if data.from_cache:
             logger.info(f"Using cached data for {url}")
             expires_seconds = data.created_at + datetime.timedelta(
-                seconds=session.expire_after
+                seconds=cache.expire_after
             )
             expires_seconds = expires_seconds - datetime.datetime.now()
             logger.info(f"Data expires in {expires_seconds} at {data.expires}")
