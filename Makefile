@@ -33,6 +33,19 @@ run-extract_deep: ./scripts/python/prepare_data.py
 	@echo
 	@python -m scripts.python.extract_movies -i $(articles_path) --deep
 
+run-collect-bulk: ./scripts/python/collect_bulk.py
+	@echo "Collecting bulk..."
+	@echo
+	@python -m scripts.python.collect_bulk -i $(keywords_path)
+
+run-collect-bulk_deep: ./scripts/python/collect_bulk.py
+	@echo "Collecting bulk..."
+	@echo
+	@python -m scripts.python.collect_bulk -i $(keywords_path) --deep
+
+run-collect-bulk-help: ./scripts/python/collect_bulk.py
+	@python -m scripts.python.collect_bulk -h
+
 venv/bin/activate: requirements.txt
 	@echo "Creating virtual environment..."
 	@python -m venv venv

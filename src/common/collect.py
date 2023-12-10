@@ -1,5 +1,4 @@
 import logging
-from enum import Enum
 
 import creds
 from requests_cache.session import CachedSession
@@ -29,10 +28,14 @@ def get_from_api(keywords: list, is_or_query=True, use_cache=True, pages=1):
         params["page"] = page + 1
         data = send_resquest(url, params, cache=cache)
         if not data:
-            raise ValueError("Request failed")
+            logger.warning("No data")
+            break
         elif data.status_code != 200:
+            if data.status_code == 426 or data.status_code == 429:
+                logger.warning("Rate limit reached")
+                break
             raise ValueError(data.reason)
-        all_articles.append(data)
+        all_articles.append(data.json())
 
     return all_articles
 

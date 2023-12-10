@@ -36,10 +36,7 @@ def send_resquest(url, params=None, cache: Optional[CachedSession] = None):
         )
         logger.info(f"Got status code {data.status_code} for {url}")
 
-    if data.status_code == 200:
-        return data
-    else:
-        return None
+    return data
 
 
 def make_query_or(KEYWORDS):

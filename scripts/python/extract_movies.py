@@ -43,31 +43,40 @@ def main():
 
     logger.info("Extracting movies from articles")
 
-    totalArticles = data["totalResults"]
+    totalArticles = data[0]["totalResults"]
 
-    logger.info(f"Found {totalArticles} articles")
+    logger.info(f"Found {totalArticles} articles with keywords")
 
     extracted_articles = []
-    for article in data["articles"]:
-        source = article["source"]["name"]
-        title = article["title"]
-        description = article["description"]
-        url = article["url"]
-        publishedAt = article["publishedAt"]
-        content = article["content"]
-        extracted = {
-            "source": source,
-            "title": title,
-            "description": description,
-            "url": url,
-            "publishedAt": publishedAt,
-            "content": content,
-        }
-        extracted_articles.append(extracted)
+    for page in data:
+        for article in page["articles"]:
+            source = article["source"]["name"]
+            title = article["title"]
+            description = article["description"]
+            url = article["url"]
+            publishedAt = article["publishedAt"]
+            content = article["content"]
+            extracted = {
+                "source": source,
+                "title": title,
+                "description": description,
+                "url": url,
+                "publishedAt": publishedAt,
+                "content": content,
+            }
+            extracted_articles.append(extracted)
 
     logger.info(f"Extracted {len(extracted_articles)} articles")
 
-    output_to_path(output_file, extracted_articles)
+    # check for duplicates
+    unique_articles = []
+    for article in extracted_articles:
+        if article not in unique_articles:
+            unique_articles.append(article)
+
+    logger.info(f"Found {len(unique_articles)} unique articles")
+
+    output_to_path(output_file, unique_articles)
 
     pass
 

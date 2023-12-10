@@ -11,7 +11,7 @@ KEYWORDS = [
     "The Exorcist: Believer",
     "PAW Patrol: The Mighty Movie",
     "Killers of the Flower Moon",
-    "Five Nights at Freddy’s",
+    "Five Nights at Freddy's",
     "Priscilla",
     "Saw X",
     "The Creator",
@@ -120,7 +120,12 @@ def main():
     if input_file:
         KEYWORDS = load_json(input_file)
     elif keywords:
-        KEYWORDS = keywords
+        clean_keywords = []
+        for keyword in keywords:
+            clean_keywords.append(
+                keyword.replace("|", "").replace(":", "").replace("'", "")
+            )
+        KEYWORDS = clean_keywords
     else:
         raise ValueError("Need to either provide a file or a list of keywords")
 
@@ -128,9 +133,9 @@ def main():
         KEYWORDS, is_or_query=not use_and, use_cache=not ignore_cache, pages=pages
     )
 
-    output_to_path(output_file, data.json())
+    output_to_path(output_file, data)
 
-    logger.info(f'Collected {data.json()["totalResults"]} articles')
+    # logger.info(f'Collected {data.json()["totalResults"]} articles')
 
 
 if __name__ == "__main__":
