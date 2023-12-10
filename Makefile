@@ -1,8 +1,16 @@
 run-tests:
 	@echo "Running tests..."
-	@python3 -m unittest
+	@python -m unittest
+
+run-collect: ./scripts/python/collect_movies.py
+	@echo "Collecting movies..."
+	@python -m scripts.python.collect_movies
+
+run-collect-help: ./scripts/python/collect_movies.py
+	@echo "Collecting movies..."
+	@python -m scripts.python.collect_movies -h
 
 venv/bin/activate: requirements.txt
 	@echo "Creating virtual environment..."
-	@python3 -m venv venv
+	@python -m venv venv
 	./venv/bin/pip install -r requirements.txt
