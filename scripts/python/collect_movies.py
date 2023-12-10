@@ -1,8 +1,8 @@
-import json
 import argparse
 
 from src.common.requestutils import make_query_or, make_query_and
 from src.common.collect import get_from_newsapi
+from src.common.json_utils import output_to_path, load_json
 
 KEYWORDS = [
     "Taylor Swift | The Eras Tour",
@@ -52,7 +52,7 @@ def parse_args():
         "-o",
         type=argparse.FileType("w"),
         help="Output file",
-        default="articles.json",
+        default="data/raw/articles.json",
     )
 
     parser.add_argument(
@@ -70,7 +70,7 @@ def parse_args():
 def main():
     (input_file, keywords, output_file, use_and) = parse_args()
     if input_file:
-        KEYWORDS = json.load(input_file)
+        KEYWORDS = load_json(input_file)
     elif keywords:
         KEYWORDS = keywords
     else:
@@ -83,7 +83,7 @@ def main():
 
     data = get_from_newsapi(query)
 
-    json.dump(data.json(), output_file, indent=2)
+    output_to_path(output_file, data.json())
 
 
 if __name__ == "__main__":
