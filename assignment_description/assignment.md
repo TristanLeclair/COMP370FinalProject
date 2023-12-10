@@ -158,65 +158,13 @@ Fine Print
 Evaluation Rubric 
 =================
 
-+----------------------+----------------------+----------------------+
-| > **Criteria**       | > **Points (100 in   | **Details**          |
-|                      | > total)**           |                      |
-+======================+======================+======================+
-| > Style              | > 10                 | Is the text written  |
-|                      |                      | in a clear, concise  |
-|                      |                      | way? Is good grammar |
-|                      |                      | and spelling         |
-|                      |                      | employed throughout? |
-+----------------------+----------------------+----------------------+
-| > Data collection    | > 10                 | Was the dataset      |
-| > correctness        |                      | prepared correctly?  |
-|                      |                      | Was sampling done to |
-|                      |                      | avoid problematic    |
-|                      |                      | biases? Did it have  |
-|                      |                      | baseline             |
-|                      |                      | characteristics that |
-|                      |                      | would allow this     |
-|                      |                      | study to deliver     |
-|                      |                      | meaningful insights? |
-+----------------------+----------------------+----------------------+
-| > Topic design       | > 15                 | Was a process        |
-| > validity           |                      | followed that would  |
-|                      |                      | produce valid        |
-|                      |                      | topics? Insufficient |
-|                      |                      | details should be    |
-|                      |                      | treated the same as  |
-|                      |                      | if something was not |
-|                      |                      | done.                |
-+----------------------+----------------------+----------------------+
-| > Topic validity     | > 15                 | Are the topics       |
-|                      |                      | appropriate to the   |
-|                      |                      | task? Are they       |
-|                      |                      | well-defined? Are    |
-|                      |                      | they defined to      |
-|                      |                      | minimize             |
-|                      |                      | subjectivity?        |
-+----------------------+----------------------+----------------------+
-| > Annotation quality | > 10                 | Does the annotation  |
-|                      |                      | process give us      |
-|                      |                      | confidence in the    |
-|                      |                      | quality of the       |
-|                      |                      | annotations?         |
-+----------------------+----------------------+----------------------+
-| > Results            | > 20                 | Are all results      |
-|                      |                      | requested present?   |
-|                      |                      | Do the results make  |
-|                      |                      | sense? Are outliers  |
-|                      |                      | or unusual trends    |
-|                      |                      | appropriately        |
-|                      |                      | explained?           |
-+----------------------+----------------------+----------------------+
-| > Findings           | > 20                 | Are insightful       |
-|                      |                      | interpretations      |
-|                      |                      | provided? Are these  |
-|                      |                      | grounded in results? |
-|                      |                      | Do the findings      |
-|                      |                      | integrate results    |
-|                      |                      | and prior knowledge  |
-|                      |                      | in a sound,          |
-|                      |                      | well-reasoned way?   |
-+----------------------+----------------------+----------------------+
+|--- | --- | --- |
+| **Criteria** | **Points (100 in total)** | **Details** |
+| --- | --- | --- |
+| Style | 10 | Is the text written in a clear, concise way? Is good grammar and spelling employed throughout? |
+| Data collection correctness | 10 | Was the dataset prepared correctly? Was sampling done to avoid problematic biases? Did it have baseline characteristics that would allow this study to deliver meaningful insights? |
+| Topic design validity | 15 | Was a process followed that would produce valid topics? Insufficient details should be treated the same as if something was not done. |
+| Topic validity | 15 | Are the topics appropriate to the task? Are they well-defined? Are they defined to minimize subjectivity? |
+| Annotation quality | 10 | Does the annotation process give us confidence in the quality of the annotations? |
+| Results | 20 | Are all results requested present? Do the results make sense? Are outliers or unusual trends appropriately explained? |
+| Findings | 20 | Are insightful interpretations provided? Are these grounded in results? Do the findings integrate results and prior knowledge in a sound, well-reasoned way? |
