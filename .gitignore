@@ -5,6 +5,7 @@ newsapi_cache/
 
 !data/interim/
 !data/processed/
+!data/coded/
 
 .idea/
 
