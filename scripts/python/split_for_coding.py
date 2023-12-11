@@ -118,6 +118,9 @@ def main():
     final_output_file = output_file.split(".")[0] + "_final.tsv"
     output_data(df_final, final_output_file)
 
+    non_sampled_output_file = output_file.split(".")[0] + "_non_sampled.tsv"
+    output_data(df_non_sampled, non_sampled_output_file)
+
     pass
 
 
