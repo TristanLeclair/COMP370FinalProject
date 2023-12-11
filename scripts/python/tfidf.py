@@ -5,9 +5,14 @@ import json
 import pandas as pd
 
 def main():
-    df = pd.read_csv(Path('complete.tsv'), sep='\t')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', '--input', required=True, help='Path to tsv input file')
+    parser.add_argument('-o', '--output', required=True, help='Path to json output file')
+    args = parser.parse_args()
+
+    df = pd.read_csv(Path(args.input), sep='\t')
     df = df[['title', 'description', 'final movie', 'final topic']]
-    # drop last row since it's empty
+    # drop last row since it's empty for our specific input file
     df = df[:-1]
     N = len(df) # for idf we use the original number of articles collected
     # drop rows where final movie is NR or NM as these do not contain a topic as defined in our typology
@@ -28,6 +33,14 @@ def main():
         # Remove punctuation
         for punct in punctuations:
             words = words.str.replace(punct, '')
+        # replace single quotes with a space
+        words = words.str.replace("'", ' ')
+        # also replace double quotes
+        words = words.str.replace('"', '')
+        # still need to remove the \u2018 and \u2019
+        words = words.str.replace('\u2018', '')
+        words = words.str.replace('\u2019', '')
+
         # Split the words into a list
         words = words.str.split()
         # Loop through the words
@@ -53,17 +66,17 @@ def main():
     # sort by tf-idf
     for t in topics:
         tf_idf[t] = {k: v for k, v in sorted(tf_idf[t].items(), key=lambda item: item[1], reverse=True)}
-    #print(tf_idf)
+
     # get top 10 words with tf-idf values
     for t in topics:
         tf_idf[t] = list(tf_idf[t].keys())[:10]
 
-    # to get the values as well
+    # to get the values as well, need to comment out above
     #tf_idf = {k: dict(list(v.items())[:10]) for k, v in tf_idf.items()}
 
     # save in json file
     # change file output name if outputting values as well
-    with open('tfidf_words.json', 'w') as outfile:
+    with open(Path(args.output), 'w') as outfile:
         json.dump(tf_idf, outfile)
 
     
