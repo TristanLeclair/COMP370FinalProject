@@ -1,11 +1,7 @@
 # Project specfic things here
 
-data/*
+data/raw/
 newsapi_cache/
-
-!data/interim/
-!data/processed/
-!data/coded/
 
 .idea/
 
