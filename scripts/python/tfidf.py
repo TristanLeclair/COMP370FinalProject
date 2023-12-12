@@ -14,17 +14,19 @@ def main():
     df = df[['title', 'description', 'final movie', 'final topic']]
     # drop last row since it's empty for our specific input file
     df = df[:-1]
-    N = len(df) # for idf we use the original number of articles collected
+    
     # drop rows where final movie is NR or NM as these do not contain a topic as defined in our typology
     df = df[df['final movie'] != 'NR']
     df = df[df['final movie'] != 'NM']
+    N = len(df) # numbers of articles with a valid topic
 
     # get all topics
     topics = df['final topic'].unique()
 
-    punctuations = "()[],-.?!:;#&"
+    punctuations = "()[]/,-.?!:;#&"
     with open('stopwords.txt') as f:
             stopwords = f.read().splitlines()
+    article_text = pd.DataFrame() # to store the words of each article
     word_counts = {}
     for t in topics:
         word_counts[t] = {}
@@ -43,6 +45,9 @@ def main():
 
         # Split the words into a list
         words = words.str.split()
+        # append words to article_text
+        article_text = pd.concat([article_text, words], axis=0, ignore_index=True)
+
         # Loop through the words
         for line in words:
             for word in line:
@@ -56,13 +61,18 @@ def main():
         for stopword in stopwords:
             if stopword in word_counts[t]:
                 del word_counts[t][stopword]
+        # word needs count at least 2
+        word_counts[t] = {k:v for (k,v) in word_counts[t].items() if v >= 2}
+
 
     # now compute tf-idf
     tf_idf = {}
     for t in topics:
         tf_idf[t] = {}
         for word in word_counts[t]:
-            tf_idf[t][word] = word_counts[t][word] * np.log(N / (sum([1 for topic in topics if word in word_counts[topic]])))
+            # need to calculate in how many articles the word appears
+            num_articles = sum([1 for article in article_text[0] if word in article])
+            tf_idf[t][word] = word_counts[t][word] * np.log(N / num_articles)
     # sort by tf-idf
     for t in topics:
         tf_idf[t] = {k: v for k, v in sorted(tf_idf[t].items(), key=lambda item: item[1], reverse=True)}
@@ -75,7 +85,6 @@ def main():
     #tf_idf = {k: dict(list(v.items())[:10]) for k, v in tf_idf.items()}
 
     # save in json file
-    # change file output name if outputting values as well
     with open(Path(args.output), 'w') as outfile:
         json.dump(tf_idf, outfile)
 
