@@ -32,7 +32,23 @@ A preliminary exploration revealed insights into article sources, title/descript
 
 ### Typology:
 
-Our typology categorizes articles into Movie Title, Not Mentioned, Not Relevant, Box Office, Streaming, Awards, Production, Plot and Performances, Promotion, and Movie Only Mentioned.
+We created 2 typologies of the articles based on the movies and topics they covered. The typologies are as follows (abridged, the full descriptions are in the [report](./Killers_of_the_Flower_Moon_Media_Coverage.pdf)):
+
+| Movie | Description |
+| --- | --- |
+| Movie titile | Articles that mention the movie title |
+| Not Mentioned | Articles that do not mention the movie title (e.g articles that are about movies but were cropped in the data before mentioning the name of the movie) |
+| Not Relevant | Articles that aren't about movies (e.g an article about Napoleon Bonaparte, the person, not the movie) |
+
+| Topic | Description |
+| --- | --- |
+| Box Office | Articles that mention the box office performance of a movie |
+| Streaming/home-viewing | Articles that mention the streaming/home-viewing performance of a movie |
+| Awards | Articles that mention awards that movie, and/or its actors, received |
+| Production | Articles that mention the production of a movie |
+| Plot/Performances | Articles that mention the plot or performances of a movie |
+| Promotion | Articles that mention the promotion of a movie |
+| Movie only mentioned | Articles that only mention a movie, but not any of the topics above |
 
 ### Movie Coverage:
 
