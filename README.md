@@ -1,4 +1,4 @@
-# COMP 370 Final Project
+# Unveiling the Media Tapestry: A Comprehensive Analysis of Movie Coverage
 
 ## Introduction
 
@@ -113,6 +113,7 @@ if __name__ == '__main__':
 ```
 
 ## Code structure
+```
 .
 ├── assignment_description
 ├── data
@@ -131,6 +132,7 @@ if __name__ == '__main__':
 └── tests
     └── src
         └── common
+```
 
 ## Contributors
 
